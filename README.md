@@ -17,4 +17,4 @@ Download full source code: http://www.mediafire.com/download/q8pnc2bi9v6mp8n/Sum
 
 PS：项目里OSS的配置需要改成自己的，如果没有的话要去OSS上购买相关服，由于这个是收费的所以代码里我替换成文案了，所以直接运行项目是上传不到OSS的。但是上传的效果是有的，图片也会在项目里生成。
 
-![blockchain](https://www.cnblogs.com/images/cnblogs_com/sunshine-wy/1332543/o_SummernoteExample.jpg)
+![blockchain](https://images.cnblogs.com/cnblogs_com/sunshine-wy/1332543/o_SummernoteExample.jpg)
