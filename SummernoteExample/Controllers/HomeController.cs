@@ -109,5 +109,40 @@ namespace SummernoteExample.Controllers
             }
         }
         #endregion
+
+
+        #region 备用：上传到文件服务器，接收表单上传
+        [HttpPost]
+        public string UpdateInfoImages()
+        {
+            string res = "";
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                HttpPostedFileBase file = Request.Files[i];
+                string fileName = System.IO.Path.GetFileName(file.FileName);
+                if (fileName == "") continue;
+                string fileExtension = System.IO.Path.GetExtension(fileName);
+                System.IO.Stream stream = file.InputStream;
+                byte[] bytes = new byte[stream.Length];
+                stream.Read(bytes, 0, bytes.Length);
+                stream.Seek(0, System.IO.SeekOrigin.Begin);
+                string ImageData = Convert.ToBase64String(bytes);
+                res = PostImage(1024, ImageData, fileName);
+            }
+
+            return res;
+        }
+        public static string PostImage(int id, string ImageData, string filename)
+        {
+            System.Net.WebClient WebClientObj = new System.Net.WebClient();
+            System.Collections.Specialized.NameValueCollection PostVars = new System.Collections.Specialized.NameValueCollection();
+            PostVars.Add("img", ImageData);
+            PostVars.Add("id", id.ToString());
+            PostVars.Add("filename", filename);
+            string Newurl = "http://static.lovemoqing.com/Home/Upload";
+            byte[] byRemoteInfo = WebClientObj.UploadValues(Newurl, "POST", PostVars);
+            return System.Text.Encoding.Default.GetString(byRemoteInfo);
+        }
+        #endregion
     }
 }
